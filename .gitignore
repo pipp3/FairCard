@@ -28,3 +28,12 @@
 /backend/*.tsbuildinfo
 /backend/.env
 /backend/.env.local
+/backend/coverage
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+/backend/pnpm-debug.log*
+/backend/.eslintcache
+/backend/.DS_Store
+/backend/.vscode
+/backend/.idea
