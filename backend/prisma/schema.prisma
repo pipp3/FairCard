@@ -1,0 +1,100 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+  output = "../src/generated/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String         @id @default(cuid())
+  email       String         @unique
+  passwordHash  String?   // opcional porque OAuth no lo necesita
+
+  // Auth OAuth
+  provider      String?   // "google", "github"
+  providerId    String?   // el id que te da el proveedor
+  
+  name        String
+  avatar      String?
+  region    String?
+  commune    String?
+  phone     String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  listings    Listing[]
+  sentMessages        Message[]      @relation("SentMessages")
+  conversationsBuyer  Conversation[] @relation("BuyerConversations")
+  conversationsSeller Conversation[] @relation("SellerConversations")
+}
+
+model Listing {
+  id               String        @id @default(cuid())
+
+  // Identificación de la GPU
+  vendor           String        // "NVIDIA", "AMD"
+  manufacturer     String        // "ASUS", "Gigabyte", "MSI"
+  model            String        // "RTX 4060"
+  exactModel       String?       // "ASUS RTX 4060 DUAL OC 8GB"
+
+  // Specs opcionales
+  vram             Int?          // GB
+  vramType         String?       // "GDDR6", "GDDR6X"
+  memoryBus        Int?          // bits
+  tdp              Int?          // vatios
+  powerConnectors  String?       // "2x 8-pin", "1x 16-pin"
+  slot             String?       // "Doble slot", "Triple slot"
+
+  // Publicación
+  description      String
+  price            Int
+  condition        Condition
+  status           ListingStatus @default(ACTIVE)
+  images           String[]
+  views            Int           @default(0)
+
+  // Relaciones
+  sellerId         String
+  seller           User          @relation(fields: [sellerId], references: [id])
+  conversations    Conversation[]
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  listingId String
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  buyerId   String
+  buyer     User      @relation("BuyerConversations", fields: [buyerId], references: [id])
+  sellerId  String
+  seller    User      @relation("SellerConversations", fields: [sellerId], references: [id])
+  messages  Message[]
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  senderId       String
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  content        String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+}
+
+enum Condition {
+  LIKE_NEW      // Como nueva
+  GOOD          // Buen estado
+  NO_MAINTENANCE // Sin mantenimiento
+}
+
+enum ListingStatus {
+  ACTIVE
+  SOLD
+  PAUSED
+}
