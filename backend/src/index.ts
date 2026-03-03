@@ -1,6 +1,7 @@
 import express from "express";
 import 'dotenv/config';
 import cors from "cors";
+import routes from "./routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -8,9 +9,10 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api/v1",routes);
 
 app.get("/", (req, res) => {
-  res.json({ message: "Express + TypeScript + ES6 🚀" });
+  res.json({ message: "Welcome to the Fair Card API" });
 });
 
 app.use((_req, res) => {
