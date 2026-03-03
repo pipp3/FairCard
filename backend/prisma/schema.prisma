@@ -37,11 +37,11 @@ model Listing {
   vendor           String        // "NVIDIA", "AMD"
   manufacturer     String        // "ASUS", "Gigabyte", "MSI"
   model            String        // "RTX 4060"
-  exactModel       String?       // "ASUS RTX 4060 DUAL OC 8GB"
+  exactModel       String       // "ASUS RTX 4060 DUAL OC 8GB"
 
   // Specs opcionales
-  vram             Int?          // GB
-  vramType         String?       // "GDDR6", "GDDR6X"
+  vram             Int          // GB
+  vramType         String       // "GDDR6", "GDDR6X"
   memoryBus        Int?          // bits
   tdp              Int?          // vatios
   powerConnectors  String?       // "2x 8-pin", "1x 16-pin"
