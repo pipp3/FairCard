@@ -2,7 +2,6 @@ import { Router } from "express";
 import { UsersController } from "../controllers/usersController.js";
 import { createUserSchema, updateUserSchema } from "../schemas/usersSchema.js";
 import { validate } from "../middlewares/validate.js";
-import { authMiddleware } from "../middlewares/Auth.js";
 import { adminMiddleware } from "../middlewares/Admin.js";
 const router: Router = Router();
 
