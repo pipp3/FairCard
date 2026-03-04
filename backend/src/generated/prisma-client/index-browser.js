@@ -131,6 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   region: 'region',
   commune: 'commune',
   phone: 'phone',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -189,6 +190,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserRole = exports.$Enums.UserRole = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
 exports.Condition = exports.$Enums.Condition = {
   LIKE_NEW: 'LIKE_NEW',
   GOOD: 'GOOD',

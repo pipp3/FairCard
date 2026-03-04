@@ -31,23 +31,25 @@ export const registerUser = async (data: RegisterInput) => {
             phone: data.phone
         }
     });
-    const token = generateToken(user.id);
     if (!user) {
          await prisma.user.delete({where: {email: data.email}});
         throw new Error('Error creating user');
     }
+    const token = generateToken(user.id, user.role);
+    
     return { user, token };
 }
 
 export const loginUser = async (data: LoginInput) => {
     const user = await prisma.user.findUnique({where: {email: data.email}});
-    if(!user?.passwordHash) throw new Error('Email incorrecto o contraseña incorrecta');
+    
     if (!user) {
         throw new Error('Email incorrecto o contraseña incorrecta');
     }
-    const isPasswordValid = bcrypt.compare(data.password, user.passwordHash);
+    if(!user?.passwordHash) throw new Error('Email incorrecto o contraseña incorrecta');
+    const isPasswordValid = await bcrypt.compare(data.password, user.passwordHash);
     if (!isPasswordValid) {
         throw new Error('Email incorrecto o contraseña incorrecta');
     }
-    return {user, token: generateToken(user.id)};
+    return {user, token: generateToken(user.id, user.role)};
 }

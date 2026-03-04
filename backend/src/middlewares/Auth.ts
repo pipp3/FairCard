@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 interface JwtPayload {
     userId: string;
+    role: string;
 }
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +25,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
             return res.status(500).json({ message: 'JWT secret key not configured' });
         }
         const decoded = jwt.verify(token, secretKey) as JwtPayload;
-        (req as any).user = decoded.userId;
+        req.user = { id: decoded.userId, role: decoded.role } as any;
         next();
 
     } catch (error) {
