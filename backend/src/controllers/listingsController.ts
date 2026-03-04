@@ -30,7 +30,7 @@ export class ListingsController {
 
     static async getById(req: Request, res: Response) {
         try {
-            const { id } = req.params;
+            const id = req.params.id;
             if (!id || Array.isArray(id)) {
                 res.status(400).json({ error: "Invalid listing ID" });
                 return;
@@ -44,7 +44,7 @@ export class ListingsController {
 
     static async update(req: Request, res: Response) {
         try {
-            const { id } = req.params;
+            const id = req.params.id;
             if (!id || Array.isArray(id)) {
                 res.status(400).json({ error: "Invalid listing ID" });
                 return;
@@ -58,7 +58,7 @@ export class ListingsController {
 
     static async delete(req: Request, res: Response) {
         try {
-            const { id } = req.params;
+            const id = req.params.id;
             if (!id || Array.isArray(id)) {
                 res.status(400).json({ error: "Invalid listing ID" });
                 return;

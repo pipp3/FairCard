@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 
-export const generateToken = (userId: string) => {
-  const payload = { userId };
+export const generateToken = (userId: string, role: string) => {
+  const payload = { userId, role };
   const secretKey = process.env.JWT_SECRET;
   if (!secretKey) {
     throw new Error('JWT secret key is not defined');

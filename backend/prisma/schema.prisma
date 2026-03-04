@@ -22,6 +22,7 @@ model User {
   region    String?
   commune    String?
   phone     String?
+  role     UserRole @default(USER)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   listings    Listing[]
@@ -97,4 +98,9 @@ enum ListingStatus {
   ACTIVE
   SOLD
   PAUSED
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }

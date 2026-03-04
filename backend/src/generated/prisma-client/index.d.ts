@@ -55,6 +55,14 @@ export const ListingStatus: {
 
 export type ListingStatus = (typeof ListingStatus)[keyof typeof ListingStatus]
 
+
+export const UserRole: {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
 }
 
 export type Condition = $Enums.Condition
@@ -64,6 +72,10 @@ export const Condition: typeof $Enums.Condition
 export type ListingStatus = $Enums.ListingStatus
 
 export const ListingStatus: typeof $Enums.ListingStatus
+
+export type UserRole = $Enums.UserRole
+
+export const UserRole: typeof $Enums.UserRole
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1306,6 +1318,7 @@ export namespace Prisma {
     region: string | null
     commune: string | null
     phone: string | null
+    role: $Enums.UserRole | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1321,6 +1334,7 @@ export namespace Prisma {
     region: string | null
     commune: string | null
     phone: string | null
+    role: $Enums.UserRole | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1336,6 +1350,7 @@ export namespace Prisma {
     region: number
     commune: number
     phone: number
+    role: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1353,6 +1368,7 @@ export namespace Prisma {
     region?: true
     commune?: true
     phone?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1368,6 +1384,7 @@ export namespace Prisma {
     region?: true
     commune?: true
     phone?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1383,6 +1400,7 @@ export namespace Prisma {
     region?: true
     commune?: true
     phone?: true
+    role?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1471,6 +1489,7 @@ export namespace Prisma {
     region: string | null
     commune: string | null
     phone: string | null
+    role: $Enums.UserRole
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1503,6 +1522,7 @@ export namespace Prisma {
     region?: boolean
     commune?: boolean
     phone?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     listings?: boolean | User$listingsArgs<ExtArgs>
@@ -1523,6 +1543,7 @@ export namespace Prisma {
     region?: boolean
     commune?: boolean
     phone?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1538,6 +1559,7 @@ export namespace Prisma {
     region?: boolean
     commune?: boolean
     phone?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1553,11 +1575,12 @@ export namespace Prisma {
     region?: boolean
     commune?: boolean
     phone?: boolean
+    role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "provider" | "providerId" | "name" | "avatar" | "region" | "commune" | "phone" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "provider" | "providerId" | "name" | "avatar" | "region" | "commune" | "phone" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     listings?: boolean | User$listingsArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
@@ -1587,6 +1610,7 @@ export namespace Prisma {
       region: string | null
       commune: string | null
       phone: string | null
+      role: $Enums.UserRole
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2026,6 +2050,7 @@ export namespace Prisma {
     readonly region: FieldRef<"User", 'String'>
     readonly commune: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'UserRole'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2802,9 +2827,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel: string | null
-    vram: number | null
-    vramType: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus: number | null
     tdp: number | null
     powerConnectors: string | null
@@ -2960,9 +2985,9 @@ export namespace Prisma {
       vendor: string
       manufacturer: string
       model: string
-      exactModel: string | null
-      vram: number | null
-      vramType: string | null
+      exactModel: string
+      vram: number
+      vramType: string
       memoryBus: number | null
       tdp: number | null
       powerConnectors: string | null
@@ -6067,6 +6092,7 @@ export namespace Prisma {
     region: 'region',
     commune: 'commune',
     phone: 'phone',
+    role: 'role',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6167,6 +6193,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserRole'
+   */
+  export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserRole[]'
+   */
+  export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -6253,6 +6293,7 @@ export namespace Prisma {
     region?: StringNullableFilter<"User"> | string | null
     commune?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     listings?: ListingListRelationFilter
@@ -6272,6 +6313,7 @@ export namespace Prisma {
     region?: SortOrderInput | SortOrder
     commune?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     listings?: ListingOrderByRelationAggregateInput
@@ -6294,6 +6336,7 @@ export namespace Prisma {
     region?: StringNullableFilter<"User"> | string | null
     commune?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
+    role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     listings?: ListingListRelationFilter
@@ -6313,6 +6356,7 @@ export namespace Prisma {
     region?: SortOrderInput | SortOrder
     commune?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -6334,6 +6378,7 @@ export namespace Prisma {
     region?: StringNullableWithAggregatesFilter<"User"> | string | null
     commune?: StringNullableWithAggregatesFilter<"User"> | string | null
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -6346,9 +6391,9 @@ export namespace Prisma {
     vendor?: StringFilter<"Listing"> | string
     manufacturer?: StringFilter<"Listing"> | string
     model?: StringFilter<"Listing"> | string
-    exactModel?: StringNullableFilter<"Listing"> | string | null
-    vram?: IntNullableFilter<"Listing"> | number | null
-    vramType?: StringNullableFilter<"Listing"> | string | null
+    exactModel?: StringFilter<"Listing"> | string
+    vram?: IntFilter<"Listing"> | number
+    vramType?: StringFilter<"Listing"> | string
     memoryBus?: IntNullableFilter<"Listing"> | number | null
     tdp?: IntNullableFilter<"Listing"> | number | null
     powerConnectors?: StringNullableFilter<"Listing"> | string | null
@@ -6371,9 +6416,9 @@ export namespace Prisma {
     vendor?: SortOrder
     manufacturer?: SortOrder
     model?: SortOrder
-    exactModel?: SortOrderInput | SortOrder
-    vram?: SortOrderInput | SortOrder
-    vramType?: SortOrderInput | SortOrder
+    exactModel?: SortOrder
+    vram?: SortOrder
+    vramType?: SortOrder
     memoryBus?: SortOrderInput | SortOrder
     tdp?: SortOrderInput | SortOrder
     powerConnectors?: SortOrderInput | SortOrder
@@ -6399,9 +6444,9 @@ export namespace Prisma {
     vendor?: StringFilter<"Listing"> | string
     manufacturer?: StringFilter<"Listing"> | string
     model?: StringFilter<"Listing"> | string
-    exactModel?: StringNullableFilter<"Listing"> | string | null
-    vram?: IntNullableFilter<"Listing"> | number | null
-    vramType?: StringNullableFilter<"Listing"> | string | null
+    exactModel?: StringFilter<"Listing"> | string
+    vram?: IntFilter<"Listing"> | number
+    vramType?: StringFilter<"Listing"> | string
     memoryBus?: IntNullableFilter<"Listing"> | number | null
     tdp?: IntNullableFilter<"Listing"> | number | null
     powerConnectors?: StringNullableFilter<"Listing"> | string | null
@@ -6424,9 +6469,9 @@ export namespace Prisma {
     vendor?: SortOrder
     manufacturer?: SortOrder
     model?: SortOrder
-    exactModel?: SortOrderInput | SortOrder
-    vram?: SortOrderInput | SortOrder
-    vramType?: SortOrderInput | SortOrder
+    exactModel?: SortOrder
+    vram?: SortOrder
+    vramType?: SortOrder
     memoryBus?: SortOrderInput | SortOrder
     tdp?: SortOrderInput | SortOrder
     powerConnectors?: SortOrderInput | SortOrder
@@ -6455,9 +6500,9 @@ export namespace Prisma {
     vendor?: StringWithAggregatesFilter<"Listing"> | string
     manufacturer?: StringWithAggregatesFilter<"Listing"> | string
     model?: StringWithAggregatesFilter<"Listing"> | string
-    exactModel?: StringNullableWithAggregatesFilter<"Listing"> | string | null
-    vram?: IntNullableWithAggregatesFilter<"Listing"> | number | null
-    vramType?: StringNullableWithAggregatesFilter<"Listing"> | string | null
+    exactModel?: StringWithAggregatesFilter<"Listing"> | string
+    vram?: IntWithAggregatesFilter<"Listing"> | number
+    vramType?: StringWithAggregatesFilter<"Listing"> | string
     memoryBus?: IntNullableWithAggregatesFilter<"Listing"> | number | null
     tdp?: IntNullableWithAggregatesFilter<"Listing"> | number | null
     powerConnectors?: StringNullableWithAggregatesFilter<"Listing"> | string | null
@@ -6611,6 +6656,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingCreateNestedManyWithoutSellerInput
@@ -6630,6 +6676,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingUncheckedCreateNestedManyWithoutSellerInput
@@ -6649,6 +6696,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUpdateManyWithoutSellerNestedInput
@@ -6668,6 +6716,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUncheckedUpdateManyWithoutSellerNestedInput
@@ -6687,6 +6736,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6702,6 +6752,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6717,6 +6768,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6726,9 +6778,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -6750,9 +6802,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -6774,9 +6826,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6798,9 +6850,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6822,9 +6874,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -6845,9 +6897,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6867,9 +6919,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7033,6 +7085,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7090,6 +7149,7 @@ export namespace Prisma {
     region?: SortOrder
     commune?: SortOrder
     phone?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7105,6 +7165,7 @@ export namespace Prisma {
     region?: SortOrder
     commune?: SortOrder
     phone?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7120,6 +7181,7 @@ export namespace Prisma {
     region?: SortOrder
     commune?: SortOrder
     phone?: SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7160,6 +7222,16 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7174,17 +7246,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7194,6 +7255,17 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type EnumConditionFilter<$PrismaModel = never> = {
@@ -7306,22 +7378,6 @@ export namespace Prisma {
     views?: SortOrder
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7336,6 +7392,22 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumConditionWithAggregatesFilter<$PrismaModel = never> = {
@@ -7508,6 +7580,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type EnumUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.UserRole
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -7648,16 +7724,16 @@ export namespace Prisma {
     connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -7857,6 +7933,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7924,6 +8007,16 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.UserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7952,33 +8045,6 @@ export namespace Prisma {
     not?: NestedEnumListingStatusFilter<$PrismaModel> | $Enums.ListingStatus
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8004,6 +8070,33 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumConditionWithAggregatesFilter<$PrismaModel = never> = {
@@ -8056,9 +8149,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -8079,9 +8172,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -8209,9 +8302,9 @@ export namespace Prisma {
     vendor?: StringFilter<"Listing"> | string
     manufacturer?: StringFilter<"Listing"> | string
     model?: StringFilter<"Listing"> | string
-    exactModel?: StringNullableFilter<"Listing"> | string | null
-    vram?: IntNullableFilter<"Listing"> | number | null
-    vramType?: StringNullableFilter<"Listing"> | string | null
+    exactModel?: StringFilter<"Listing"> | string
+    vram?: IntFilter<"Listing"> | number
+    vramType?: StringFilter<"Listing"> | string
     memoryBus?: IntNullableFilter<"Listing"> | number | null
     tdp?: IntNullableFilter<"Listing"> | number | null
     powerConnectors?: StringNullableFilter<"Listing"> | string | null
@@ -8309,6 +8402,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
@@ -8327,6 +8421,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -8387,6 +8482,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
@@ -8405,6 +8501,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -8433,9 +8530,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -8456,9 +8553,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -8490,6 +8587,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingCreateNestedManyWithoutSellerInput
@@ -8508,6 +8606,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingUncheckedCreateNestedManyWithoutSellerInput
@@ -8531,6 +8630,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingCreateNestedManyWithoutSellerInput
@@ -8549,6 +8649,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingUncheckedCreateNestedManyWithoutSellerInput
@@ -8603,9 +8704,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8626,9 +8727,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8666,6 +8767,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUpdateManyWithoutSellerNestedInput
@@ -8684,6 +8786,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUncheckedUpdateManyWithoutSellerNestedInput
@@ -8713,6 +8816,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUpdateManyWithoutSellerNestedInput
@@ -8731,6 +8835,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUncheckedUpdateManyWithoutSellerNestedInput
@@ -8786,6 +8891,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingCreateNestedManyWithoutSellerInput
@@ -8804,6 +8910,7 @@ export namespace Prisma {
     region?: string | null
     commune?: string | null
     phone?: string | null
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
     listings?: ListingUncheckedCreateNestedManyWithoutSellerInput
@@ -8865,6 +8972,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUpdateManyWithoutSellerNestedInput
@@ -8883,6 +8991,7 @@ export namespace Prisma {
     region?: NullableStringFieldUpdateOperationsInput | string | null
     commune?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     listings?: ListingUncheckedUpdateManyWithoutSellerNestedInput
@@ -8895,9 +9004,9 @@ export namespace Prisma {
     vendor: string
     manufacturer: string
     model: string
-    exactModel?: string | null
-    vram?: number | null
-    vramType?: string | null
+    exactModel: string
+    vram: number
+    vramType: string
     memoryBus?: number | null
     tdp?: number | null
     powerConnectors?: string | null
@@ -8939,9 +9048,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8962,9 +9071,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8985,9 +9094,9 @@ export namespace Prisma {
     vendor?: StringFieldUpdateOperationsInput | string
     manufacturer?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
-    exactModel?: NullableStringFieldUpdateOperationsInput | string | null
-    vram?: NullableIntFieldUpdateOperationsInput | number | null
-    vramType?: NullableStringFieldUpdateOperationsInput | string | null
+    exactModel?: StringFieldUpdateOperationsInput | string
+    vram?: IntFieldUpdateOperationsInput | number
+    vramType?: StringFieldUpdateOperationsInput | string
     memoryBus?: NullableIntFieldUpdateOperationsInput | number | null
     tdp?: NullableIntFieldUpdateOperationsInput | number | null
     powerConnectors?: NullableStringFieldUpdateOperationsInput | string | null
