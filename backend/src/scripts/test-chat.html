@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test Chat</title></head>
+<body>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbW01ZDU3NXYwMDAwOGt0eWg3dzhpNjYwIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzcyNjY5MzIwLCJleHAiOjE3NzI2NzI5MjB9.4J8F9E74dh6x8NMd4NFviCJR9mM4vSluRHDiNd1u2-c'
+    const conversationId = '1'
+
+    const socket = io('http://localhost:3000', {
+      auth: { token }
+    })
+
+    socket.on('connect', () => {
+      console.log('Conectado:', socket.id)
+      socket.emit('join_conversation', { conversationId })
+    })
+
+    socket.on('joined_conversation', (data) => {
+      console.log('Unido a conversación:', data)
+      // mandar un mensaje de prueba
+      socket.emit('send_message', { conversationId, content: 'Hola, está disponible?' })
+    })
+
+    socket.on('receive_message', (data) => {
+      console.log('Mensaje recibido:', data)
+    })
+
+    socket.on('error', (data) => {
+      console.error('Error:', data)
+    })
+
+    socket.on('disconnect', () => {
+      console.log('Desconectado')
+    })
+  </script>
+</body>
+</html>

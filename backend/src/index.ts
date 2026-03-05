@@ -1,10 +1,44 @@
 import express from "express";
 import 'dotenv/config';
+import { createServer } from 'http'
+import { Server } from 'socket.io'
 import cors from "cors";
 import routes from "./routes/index.js";
+import jwt from "jsonwebtoken";
+import { chatSocket } from "./sockets/chat.socket.js";
 
 const app = express();
 const PORT = process.env.PORT;
+const secretKey = process.env.JWT_SECRET!
+
+const httpServer = createServer(app)
+const io = new Server(httpServer, {
+  cors: { origin: '*' }
+})
+
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  if (!token) {
+    return next(new Error("Authentication error: No token provided"));
+  }
+  try {
+    const decoded = jwt.verify(token, secretKey) as { userId: string };
+    socket.data.userId = decoded.userId;
+    next();
+  } catch (error) {
+    next(new Error("Authentication error: Invalid token"));
+  }
+})
+ 
+io.on('connection', (socket) => {
+  console.log('a user connected', socket.id)
+  chatSocket(io, socket)
+  socket.on('disconnect', () => {
+    console.log('user disconnected', socket.id)
+  })
+})
+
+
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +63,6 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   })
 })
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
